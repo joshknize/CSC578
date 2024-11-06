@@ -1,0 +1,197 @@
+Script started on 2024-11-02 11:42:20-05:00 [TERM="xterm-256color" TTY="/dev/pts/29" COLUMNS="156" LINES="41"]
+]0;jknize@aiscalar: ~/main/repo/CSC578/detectron2/knize[01;32mjknize@aiscalar[00m:[01;34m~/main/repo/CSC578/detectron2/knize[00m$ cd ..
+]0;jknize@aiscalar: ~/main/repo/CSC578/detectron2[01;32mjknize@aiscalar[00m:[01;34m~/main/repo/CSC578/detectron2[00m$ cd .[K[K[K[Kcd demoe[K
+]0;jknize@aiscalar: ~/main/repo/CSC578/detectron2/demo[01;32mjknize@aiscalar[00m:[01;34m~/main/repo/CSC578/detectron2/demo[00m$ python [K[K[K[K[K[K[Knvtop
+[?1049h[22;0;0t[1;41r(B[m[4l[?7h[39;49m[?1h=[?25l[39;49m(B[m[H[2J [36mDevice 0 [39m(B[m[NVIDIA A100 80GB PCIe] [36mPCIe [35mGEN [39m(B[m4@16x[35m RX: [39m(B[m1.087 MB/s[35m TX: [39m(B[m1.000 kB/s[36mDevice 1 [39m(B[m[NVIDIA A100 80GB PCIe] [36mPCIe [35mGEN [39m(B[m4@16x[35m RX: [39m(B[m4.000 kB/s[35m TX: [39m(B[m84.00 kB/s
+ [36mGPU[39m(B[m 1410MHz [36mMEM[39m(B[m 1512MHz [36mTEMP[39m(B[m [32m 41[39m(0[0mf(BC [36mFAN[39m(B[m N/A% [36mPOW[39m(B[m  77 / 300 W[2;79H[36mGPU[39m(B[m 1410MHz [36mMEM[39m(B[m 1512MHz [36mTEMP[39m(B[m [32m 43[39m(0[0mf(BC [36mFAN[39m(B[m N/A% [36mPOW[39m(B[m  73 / 300 W
+ [36mGPU[39m(B[m[[32m|||||||[3;36H[39m(B[m21%] [36mMEM[39m(B[m[[32m|||||||||||[3;67H[39m(B[m29.3G/85.9G][36mGPU[39m(B[m[[32m|[3;114H[39m(B[m4%] [36mMEM[39m(B[m[[32m|[3;145H[39m(B[m2.5G/85.9G]
+
+ [36mDevice 2 [39m(B[m[NVIDIA A100 80GB PCIe] [36mPCIe [35mGEN [39m(B[m4@16x[35m RX: [39m(B[m146.0 kB/s[35m TX: [39m(B[m1.000 kB/s[36mDevice 3 [39m(B[m[NVIDIA A100 80GB PCIe] [36mPCIe [35mGEN [39m(B[m4@16x[35m RX: [39m(B[m0.000 kB/s[35m TX: [39m(B[m1.000 kB/s
+ [36mGPU[39m(B[m 1410MHz [36mMEM[39m(B[m 1512MHz [36mTEMP[39m(B[m [32m 35[39m(0[0mf(BC [36mFAN[39m(B[m N/A% [36mPOW[39m(B[m  75 / 300 W[6;79H[36mGPU[39m(B[m 1410MHz [36mMEM[39m(B[m 1512MHz [36mTEMP[39m(B[m [32m 34[39m(0[0mf(BC [36mFAN[39m(B[m N/A% [36mPOW[39m(B[m  81 / 300 W
+ [36mGPU[39m(B[m[[32m|[7;37H[39m(B[m3%] [36mMEM[39m(B[m[[32m|[7;68H[39m(B[m2.5G/85.9G][36mGPU[39m(B[m[[32m||[7;114H[39m(B[m5%] [36mMEM[39m(B[m[[32m|[7;145H[39m(B[m2.5G/85.9G]
+   (0[0mlqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk(B
+(0[0m(B100(0[0mx(B[9;148H(0[0m(B[0m[36mGPU 0[39m(0[0mx(B
+   (0[0mx(B[10;148H(0[0m(B[0m[33mMEM 0[39m(0[0mx(B
+(0[0m(B75%(0[0mx(B[11;148H(0[0m(B[0m[35mGPU 1[39m(0[0mx(B
+   (0[0mx(B[12;148H(0[0m(B[0m[32mMEM 1[39m(0[0mx(B
+(0[0m(B50%(0[0mx(B[153G(0[0mx(B
+   (0[0mx(B[153G(0[0mx(B
+(0[0m(B25%(0[0mx(B[153G(0[0mx(B
+   (0[0mx(B[153G(0[0mx(B
+ (0[0m(B0%(0[0mx[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[39mx(B
+   (0[0mmqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj(B
+   (0[0mlqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk(B
+(0[0m(B100(0[0mx(B[20;148H(0[0m(B[0m[36mGPU 2[39m(0[0mx(B
+   (0[0mx(B[21;148H(0[0m(B[0m[33mMEM 2[39m(0[0mx(B
+(0[0m(B75%(0[0mx(B[22;148H(0[0m(B[0m[35mGPU 3[39m(0[0mx(B
+   (0[0mx(B[23;148H(0[0m(B[0m[32mMEM 3[39m(0[0mx(B
+(0[0m(B50%(0[0mx(B[153G(0[0mx(B
+   (0[0mx(B[153G(0[0mx(B
+(0[0m(B25%(0[0mx(B[153G(0[0mx(B
+   (0[0mx(B[153G(0[0mx(B
+ (0[0m(B0%(0[0mx[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[36mq[33mq[35mq[32mq[39mx(B
+   (0[0mmqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj(B
+(0[0m(B[0;7m[32m  PID     USER GPU    TYPE [36m      GPU MEM[32m    CPU  HOST MEM Command                                                                                           [31;1H[36m33100      sro   0 Compute  18912MB  23%     0%    1338MB python lecturenet_train_00_pretrain_reconstruction.py configs/conf_LectureMath_Sun.conf           [32;1H[39m(B[m22379   tmalik   0 [35mCompute[39m(B[m   5754MB   7%     0%  753096MB python rags_pipeline_hotpot.py
+33027[12Gsro   0 [35mCompute[39m(B[m    790MB   1%     0%    1118MB python lecturenet_train_00_pretrain_reconstruction.py configs/conf_LectureMath_Sun.conf
+37491 msabouri   0 [35mCompute[39m(B[m    782MB   1%     0%    2287MB python main.py --approach=centric-based --run_name=centric-based-10K
+28385 msabouri   0 [35mCompute[39m(B[m    754MB   1% 12660%    2281MB python main.py --approach=llm-based --run_name=llm-based-10K-Sweep
+28385 msabouri   1 [35mCompute[39m(B[m    744MB   1% 19059%    2281MB python main.py --approach=llm-based --run_name=llm-based-10K-Sweep
+37491 msabouri   2 [35mCompute[39m(B[m    744MB   1%   106%    2287MB python main.py --approach=centric-based --run_name=centric-based-10K
+28385 msabouri   3 [35mCompute[39m(B[m    724MB   1% 16396%    2281MB python main.py --approach=llm-based --run_name=llm-based-10K-Sweep
+37491 msabouri   3 [35mCompute[39m(B[m    724MB   1%  4081%    2326MB python main.py --approach=centric-based --run_name=centric-based-10K
+37491 msabouri   1 [35mCompute[39m(B[m    716MB   1%   102%    2287MB python main.py --approach=centric-based --run_name=centric-based-10K
+F1(B[0;7m[36mKill    [39m(B[mF2(B[0;7m[36mSort    [39m(B[mF3(B[0;7m[36mQuit                                                                                                                                 [?7l [?7h[24;5H[39m(B[m[H[1;54H5.000 k[1;70H84.[1;131H5[1;146H31[2;52H9[2;128H88
+[7G      [3;36H 3[3;83H [3;114H1[5;55H.00[5;69H2[5;131H47.[6;51H88[6;128H75[7;37H2[7;84H [7;114H2[14;5H(0[0m[33mqqqqqk[39m(B(B[m
+(0[0m[33mx[39m(B(B[m
+(0[0m[33mx[39m(B(B[m
+[6G(0[0m[33m[32mq[35mq[32mq[36mq[33mv[39m(B(B[m[32;44H(0[0m[33m[39m(B(B[m777[54G64[34;42H10242
+[42G 6418[35;55H2[36;42H   72[36;55H2[37;44H378
+[42G 7303[53G319[39;43H 106[53G287[40;42H155[24;5H[H[1;54H0[1;69H0.00[1;131H1[1;146H0.0[2;52H7[2;128H73
+[7G[32m||||[3;36H[39m(B[m15[3;83H[32m|[3;114H[39m(B[m2[5;54H301.[5;69H1[5;131H141.[5;146H2[6;52H6[6;129H3[7;83H [7;114H1[14;10H(0[0m[33mqqqqk[39m(B(B[m
+[10G(0[0m[33m[39m(B(B[m    (0[0m[33mx[39m(B(B[m
+[5G(0[0m[33m[36mqqqqk[39m(B(B[m    (0[0m[33mx[39m(B(B[m
+[5G(0[0m[33m[32mqq[35mq[32mq[36mv[32mq[35mq[32mq[36mq[33mv[39m(B(B[m[32;44H(0[0m[33m[39m(B(B[m851[54G71[34;42H 8521
+741
+106[53G301[37;44H 81
+[42G20826[53G280[39;45H10
+[42G  107[24;5H[H[1;54H3[1;69H1[1;131H0[2;50H113[2;128H87
+[7G    [3;36H 3[5;54H123[5;69H0[5;146H3[6;51H75[7;83H[32m|[7;114H[39m(B[m2[14;14H(0[0m[33mqqqqk[39m(B(B[m
+[14G(0[0m[33m[39m(B(B[m    (0[0m[33mx[39m(B(B[m
+[5G(0[0m[33m[39m(B(B[m    (0[0m[36mlqqqk[39m(B(B[m    (0[0m[33mx[39m(B(B[m
+[5G(0[0m[33m[36mq[39m(B(B[m[13G(0[0m[36mv[32mq[35mq[32mq[36mq[33mv[39m(B(B[m[32;44H(0[0m[33m[39m(B(B[m420[32;55H5[34;43H6950[34;55H8[35;42H10127[35;55H1[36;45H10[53G28[37;43H8320[37;55H9[38;42H  108[38;55H1[39;42H184[39;55H9[40;45H11[40;55H8[24;5H[H[1;54H6[1;69H275.[1;131H4[1;146H61.[2;50H 77[2;129H4
+[7G[32m||[3;36H[39m(B[m10[3;114H3[5;54H0.00[5;69H1[5;132H.00[5;146H0[6;51H83[6;128H84[14;18H(0[0m[33mqqqqk[39m(B(B[m
+[18G(0[0m[33m[39m(B(B[m    (0[0m[33mx[39m(B(B[m
+[5G(0[0m[33m[36mqqqqk[39m(B(B[m   (0[0m[36mlqqqk[39m(B(B[m    (0[0m[33mx[39m(B(B[m
+[5G(0[0m[33m[32mq[39m(B(B[m[17;17H(0[0m[32m[36mv[32mq[35mq[32mq[36mq[33mv[39m(B(B[m[32;44H(0[0m[33m[39m(B(B[m923[54G81[34;43H7439[34;55H9[35;42H 8749
+24
+[42G18571
+ 62
+[42G 2604
+[42G1854[40;55H9[24;5H[H[41;1H[?12l[?25h[?1049l[23;0;0t[?1l>]0;jknize@aiscalar: ~/main/repo/CSC578/detectron2/demo[01;32mjknize@aiscalar[00m:[01;34m~/main/repo/CSC578/detectron2/demo[00m$ CUDA_VISILB[K[KBLE_DEVICES-3[K[K=3 python demo/[K[K[K[K[Kdeom[K[Kmo.py --foni[K[K[K[Kconfig-file ../configs/COOCO[K[K[KCO-Detection/faster_rcnn_R_50_C4_1x.yam l \ --input input1.jpg input2 .jpg \ [--other[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K
+> --input input1.js[Kpg input2.jpg \
+> [--other [K-options]
+Traceback (most recent call last):
+  File "demo.py", line 13, in <module>
+    from detectron2.config import get_cfg
+ModuleNotFoundError: No module named 'detectron2'
+]0;jknize@aiscalar: ~/main/repo/CSC578/detectron2/demo[01;32mjknize@aiscalar[00m:[01;34m~/main/repo/CSC578/detectron2/demo[00m$ CUDA_VISIBLE_DEVICES=3 python demo.py --config-file ../configs/COCO-Detection/faster_rcnn_R_50_C4_1x.yaml --input input1.jpg input2.jpg [--other-options][A]0;jknize@aiscalar: ~/main/repo/CSC578/detectron2/demo[01;32mjknize@aiscalar[00m:[01;34m~/main/repo/CSC578/detectron2/demo[00m$ nvtop[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CCUDA_VISIBLE_DEVICES=3 python demo.py --config-file ../configs/COCO-Detection/faster_rcnn_R_50_C4_1x.yaml --input input1.jpg input2.jpg [--other-options] --opts MODEL.WEIGHTS detectron2://COCO-InstanceS[K[K[K[K[K[K[K[K[K[Anvtop[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[Kcd demo[2P..demo[KCUDA_VISIBLE_DEVICES=3 python demo.py --config-file ../configs/COCO-Detection/faster_rcnn_R_50_C4_1x.yaml --input input1.jpg input2.jpg [--other-options] --opts MODEL.WEIGHTS detectron2://COCO-[A[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CCUDA_VISIBLE_DEVICES=3 python demo.py --config-file ../configs/COCO-Detection/faster_rcnn_R_50_C4_1x.yaml --input input1.jpg input2.jpg [--other-options] --opts MODEL.WEIGHTS detectron2://COCO-OB[KbjectDetection/faster_rcnn_R-[K_50_C4_1x/137849600/model_final_f10217.pkl"[K
+Traceback (most recent call last):
+  File "demo.py", line 13, in <module>
+    from detectron2.config import get_cfg
+ModuleNotFoundError: No module named 'detectron2'
+]0;jknize@aiscalar: ~/main/repo/CSC578/detectron2/demo[01;32mjknize@aiscalar[00m:[01;34m~/main/repo/CSC578/detectron2/demo[00m$ python demo.py --config-file ../configs/COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml \
+> --input input1.jpg input2.jpg \
+>  [K[--other-options] --opts MODEL.WEIGHTS detectron2://COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x/137849600/model_final_f10217.pkl
+Traceback (most recent call last):
+  File "demo.py", line 13, in <module>
+    from detectron2.config import get_cfg
+ModuleNotFoundError: No module named 'detectron2'
+]0;jknize@aiscalar: ~/main/repo/CSC578/detectron2/demo[01;32mjknize@aiscalar[00m:[01;34m~/main/repo/CSC578/detectron2/demo[00m$ python demo.py --config-file ../configs/COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml --input input1.jpg input2.jpg [--other-options] --opts MODEL.WEIGHTS detectron2://COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x/137849600/model_final_f10217.pkl[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P
+Traceback (most recent call last):
+  File "demo.py", line 13, in <module>
+    from detectron2.config import get_cfg
+ModuleNotFoundError: No module named 'detectron2'
+]0;jknize@aiscalar: ~/main/repo/CSC578/detectron2/demo[01;32mjknize@aiscalar[00m:[01;34m~/main/repo/CSC578/detectron2/demo[00m$ python demo.py --config-file ../configs/COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml --input input1.jpg input2.jpg --opts MODEL.WEIGHTS detectron2://COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x/137849600/model_final_f10217.pkl[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K
+Traceback (most recent call last):
+  File "demo.py", line 13, in <module>
+    from detectron2.config import get_cfg
+ModuleNotFoundError: No module named 'detectron2'
+]0;jknize@aiscalar: ~/main/repo/CSC578/detectron2/demo[01;32mjknize@aiscalar[00m:[01;34m~/main/repo/CSC578/detectron2/demo[00m$ cd ..
+]0;jknize@aiscalar: ~/main/repo/CSC578/detectron2[01;32mjknize@aiscalar[00m:[01;34m~/main/repo/CSC578/detectron2[00m$ ls
+[0m[01;34mconfigs[0m   [01;34mdemo[0m        [01;34mdev[0m     [01;34mdocs[0m                INSTALL.md  LICENSE       [01;34mprojects[0m   setup.cfg  [01;34mtests[0m
+[01;34mdatasets[0m  [01;34mdetectron2[0m  [01;34mdocker[0m  GETTING_STARTED.md  [01;34mknize[0m       MODEL_ZOO.md  README.md  setup.py   [01;34mtools[0m
+]0;jknize@aiscalar: ~/main/repo/CSC578/detectron2[01;32mjknize@aiscalar[00m:[01;34m~/main/repo/CSC578/detectron2[00m$ cd deter[Kc[K[K[K[K[K[K[K[Kcd detet[Kctroin[K[Kn2
+]0;jknize@aiscalar: ~/main/repo/CSC578/detectron2/detectron2[01;32mjknize@aiscalar[00m:[01;34m~/main/repo/CSC578/detectron2/detectron2[00m$ ls
+[0m[01;34mcheckpoint[0m  [01;34mconfig[0m  [01;34mdata[0m  [01;34mengine[0m  [01;34mevaluation[0m  [01;34mexport[0m  __init__.py  [01;34mlayers[0m  [01;34mmodeling[0m  [01;34mmodel_zoo[0m  [01;34mprojects[0m  [01;34msolver[0m  [01;34mstructures[0m  [01;34mtracking[0m  [01;34mutils[0m
+]0;jknize@aiscalar: ~/main/repo/CSC578/detectron2/detectron2[01;32mjknize@aiscalar[00m:[01;34m~/main/repo/CSC578/detectron2/detectron2[00m$ dc ..[K[K[K[K[Kcd ..
+]0;jknize@aiscalar: ~/main/repo/CSC578/detectron2[01;32mjknize@aiscalar[00m:[01;34m~/main/repo/CSC578/detectron2[00m$ cd ..
+]0;jknize@aiscalar: ~/main/repo/CSC578[01;32mjknize@aiscalar[00m:[01;34m~/main/repo/CSC578[00m$ pip install detectron2
+Defaulting to user installation because normal site-packages is not writeable
+[31mERROR: Could not find a version that satisfies the requirement detectron2 (from versions: none)[0m[31m
+[0m[31mERROR: No matching distribution found for detectron2[0m[31m
+[0m
+[1m[[0m[34;49mnotice[0m[1;39;49m][0m[39;49m A new release of pip is available: [0m[31;49m23.1.2[0m[39;49m -> [0m[32;49m24.3.1[0m
+[1m[[0m[34;49mnotice[0m[1;39;49m][0m[39;49m To update, run: [0m[32;49mpython3 -m pip install --upgrade pip[0m
+]0;jknize@aiscalar: ~/main/repo/CSC578[01;32mjknize@aiscalar[00m:[01;34m~/main/repo/CSC578[00m$ python[K[K[K[K[K[Kcd detectron2
+]0;jknize@aiscalar: ~/main/repo/CSC578/detectron2[01;32mjknize@aiscalar[00m:[01;34m~/main/repo/CSC578/detectron2[00m$ cd demo
+]0;jknize@aiscalar: ~/main/repo/CSC578/detectron2/demo[01;32mjknize@aiscalar[00m:[01;34m~/main/repo/CSC578/detectron2/demo[00m$ python
+Python 3.8.10 (default, Nov 22 2023, 10:22:35) 
+[GCC 9.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import detectron2
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ModuleNotFoundError: No module named 'detectron2'
+>>> pip install detectron2
+  File "<stdin>", line 1
+    pip install detectron2
+        ^
+SyntaxError: invalid syntax
+>>> 
+KeyboardInterrupt
+>>> exit
+Use exit() or Ctrl-D (i.e. EOF) to exit
+>>> eixt(0[K[K[K[K[Kxit()
+]0;jknize@aiscalar: ~/main/repo/CSC578/detectron2/demo[01;32mjknize@aiscalar[00m:[01;34m~/main/repo/CSC578/detectron2/demo[00m$ source /[K[K[K[K[K[K[K[Kcd ..cd
+bash: cd: ..cd: No such file or directory
+]0;jknize@aiscalar: ~/main/repo/CSC578/detectron2/demo[01;32mjknize@aiscalar[00m:[01;34m~/main/repo/CSC578/detectron2/demo[00m$  [Kcd ..
+]0;jknize@aiscalar: ~/main/repo/CSC578/detectron2[01;32mjknize@aiscalar[00m:[01;34m~/main/repo/CSC578/detectron2[00m$ cd ..
+]0;jknize@aiscalar: ~/main/repo/CSC578[01;32mjknize@aiscalar[00m:[01;34m~/main/repo/CSC578[00m$ cd ..
+]0;jknize@aiscalar: ~/main/repo[01;32mjknize@aiscalar[00m:[01;34m~/main/repo[00m$ cd ..
+]0;jknize@aiscalar: ~/main[01;32mjknize@aiscalar[00m:[01;34m~/main[00m$ python
+Python 3.8.10 (default, Nov 22 2023, 10:22:35) 
+[GCC 9.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import detectron2
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ModuleNotFoundError: No module named 'detectron2'
+>>> impor [K[Krt repo/CSC578/[K[K[K[K[K[K[K[K.CDC[K[KSC.[K578.detecr[Ktron2.detectron2
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/jknize/main/repo/CSC578/detectron2/detectron2/__init__.py", line 5, in <module>
+    setup_environment()
+  File "/home/jknize/main/repo/CSC578/detectron2/detectron2/utils/env.py", line 109, in setup_environment
+    _configure_libraries()
+  File "/home/jknize/main/repo/CSC578/detectron2/detectron2/utils/env.py", line 88, in _configure_libraries
+    import fvcore
+ModuleNotFoundError: No module named 'fvcore'
+>>> pip ins[K[K[K[K[K[K[Kexit()
+]0;jknize@aiscalar: ~/main[01;32mjknize@aiscalar[00m:[01;34m~/main[00m$ ip[K[Kpipi ins[K[K[K[K[Kin s[K[K[K[K install fvcore
+Defaulting to user installation because normal site-packages is not writeable
+Collecting fvcore
+  Downloading fvcore-0.1.5.post20221221.tar.gz (50 kB)
+[?25l     [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/50.2 kB[0m [31m?[0m eta [36m-:--:--[0m[2K     [38;5;70m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m50.2/50.2 kB[0m [31m4.2 MB/s[0m eta [36m0:00:00[0m
+[?25h  Preparing metadata (setup.py) ... [?25l- done
+[?25hRequirement already satisfied: Pillow in /usr/lib/python3/dist-packages (from fvcore) (7.0.0)
+Collecting iopath>=0.1.7 (from fvcore)
+  Downloading iopath-0.1.10.tar.gz (42 kB)
+[?25l     [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/42.2 kB[0m [31m?[0m eta [36m-:--:--[0m[2K     [38;5;70m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m42.2/42.2 kB[0m [31m14.4 MB/s[0m eta [36m0:00:00[0m
+[?25h  Preparing metadata (setup.py) ... [?25l- done
+[?25hRequirement already satisfied: numpy in /home/jknize/.local/lib/python3.8/site-packages (from fvcore) (1.22.1)
+Requirement already satisfied: pyyaml>=5.1 in /usr/lib/python3/dist-packages (from fvcore) (5.3.1)
+Collecting tabulate (from fvcore)
+  Downloading tabulate-0.9.0-py3-none-any.whl (35 kB)
+Requirement already satisfied: termcolor>=1.1 in /usr/lib/python3/dist-packages (from fvcore) (1.1.0)
+Requirement already satisfied: tqdm in /home/jknize/.local/lib/python3.8/site-packages (from fvcore) (4.66.2)
+Collecting yacs>=0.1.6 (from fvcore)
+  Downloading yacs-0.1.8-py3-none-any.whl (14 kB)
+Collecting portalocker (from iopath>=0.1.7->fvcore)
+  Downloading portalocker-2.10.1-py3-none-any.whl (18 kB)
+Requirement already satisfied: typing_extensions in /home/jknize/.local/lib/python3.8/site-packages (from iopath>=0.1.7->fvcore) (4.10.0)
+Building wheels for collected packages: fvcore, iopath
+  Building wheel for fvcore (setup.py) ... [?25l- done
+[?25h  Created wheel for fvcore: filename=fvcore-0.1.5.post20221221-py3-none-any.whl size=61432 sha256=4912dff408e3c8cdd10ae67ef45347704000570d96691fe42bd14ac72801e869
+  Stored in directory: /home/jknize/.cache/pip/wheels/b8/79/07/c0e9367f5b5ea325e246bd73651e8af175fabbef943043b1cc
+  Building wheel for iopath (setup.py) ... [?25l- done
+[?25h  Created wheel for iopath: filename=iopath-0.1.10-py3-none-any.whl size=31541 sha256=d0f421452c0df0c27b5c8a7d87ae8f32cb8e0eb19ffa617df3157eee39796bcd
+  Stored in directory: /home/jknize/.cache/pip/wheels/89/3e/24/0f349c0b2eeb6965903035f3b00dbb5c9bea437b4a2f18d82c
+Successfully built fvcore iopath
+Installing collected packages: yacs, tabulate, portalocker, iopath, fvcore
+Successfully installed fvcore-0.1.5.post20221221 iopath-0.1.10 portalocker-2.10.1 tabulate-0.9.0 yacs-0.1.8
+
+[1m[[0m[34;49mnotice[0m[1;39;49m][0m[39;49m A new release of pip is available: [0m[31;49m23.1.2[0m
