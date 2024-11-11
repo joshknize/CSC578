@@ -3,9 +3,9 @@ import os
 
 os.chdir('/home/jknize/main/repo/CSC578/detectron2')
 
-chosen_class_ids = [1, 18, 44, 62, 84]  # (person, dog, bottle, chair, book)
+chosen_class_ids = [18]  # dog
 
-annotations_path = '../datasets/coco/annotations/instances_train2017.json'
+annotations_path = '../datasets/coco/annotations/filtered_instances_val2017_2.json'
 
 # Load the annotations
 with open(annotations_path, 'r') as f:
@@ -31,7 +31,7 @@ coco_annotations['categories'] = filtered_categories
 coco_annotations['images'] = filtered_images
 
 # Save the filtered annotations to a new file
-filtered_annotations_path = '../datasets/coco/annotations/filtered_instances_train2017_2.json'
+filtered_annotations_path = '../datasets/coco/annotations/dog_instances_val2017.json'
 with open(filtered_annotations_path, 'w') as f:
     json.dump(coco_annotations, f)
 
