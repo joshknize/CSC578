@@ -1,3 +1,2 @@
 datasets/*
-detectron2/knize/output/subset/model_final.pth
-detectron/knize/output/*
+detectron2/knize/output/**
