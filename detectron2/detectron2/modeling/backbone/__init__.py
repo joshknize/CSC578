@@ -16,5 +16,8 @@ from .vit import ViT, SimpleFeaturePyramid, get_vit_lr_decay_rate
 from .mvit import MViT
 from .swin import SwinTransformer
 
+# add hebbnet
+from .hebb_knize0 import HebbNet, HebbRuleWithActivationThreshold
+
 __all__ = [k for k in globals().keys() if not k.startswith("_")]
 # TODO can expose more resnet blocks after careful consideration
