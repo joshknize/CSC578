@@ -51,7 +51,7 @@ class HebbNet(Backbone):
         # set necessary dictionary for region-based modular components of RCNN
             # unsure if these are still necessary after I changed from `_BASE_: "../Base-RCNN-FPN.yaml"` to the simpler "../Base-RCNN-C4.yaml"
         self._out_feature_strides = {"res4": 16} # TODO 16 is arbitrary hard-code; pave
-        self._out_feature_channels = {"res4": 1024} # TODO 1024 is arbitrary hard-code; pave
+        self._out_feature_channels = {"res4": 3} # TODO arbitrary hard-code; pave
 
         # initialize dictionary of outputs along forward pass layers / steps
         out_features = ["res4"]
@@ -65,7 +65,7 @@ class HebbNet(Backbone):
         x = self.flatten(x)
         z = self.hebbian_weights(x)
         width = np.sqrt(self.input_layer_size / 3)
-        features = z.clone().reshape(int(width), int(width), 3)
+        features = z.clone().reshape(1, 3, int(width), int(width)) 
         z = self.relu(z)  # Apply ReLU activation after the Hebbian layer
         pred = self.classification_weights(z)
         pred = self.softmax(pred)
@@ -148,7 +148,7 @@ def build_hebbnet_backbone(cfg, input_shape):
     """
     
     input_layer_size = cfg.INPUT.MAX_SIZE_TRAIN * cfg.INPUT.MAX_SIZE_TRAIN * 3
-    hidden_layer_size = 2352 # input_layer_size # TODO cheating... don't feel like figuring out cfg right now
+    hidden_layer_size = input_layer_size # TODO the box_features (ROI section) wants 1024 channels; trying this for drilling
     output_layer_size = cfg.MODEL.ROI_HEADS.NUM_CLASSES
 
     # return HebbNet(input_shape, hidden_layer_size, output_layer_size) # temporarily hard-code to see further into debugger execution
