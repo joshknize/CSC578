@@ -1,2 +1,6 @@
 datasets/*
 detectron2/knize/output/**
+__pycache__/**
+detectron2/detectron2/data/__pycache__/*
+detectron2/detectron2/data/dataset/__pycache__/*
+detectron2/detectron2/config/__pycache__/*

@@ -51,7 +51,7 @@ class HebbNet(Backbone):
         # set necessary dictionary for region-based modular components of RCNN
             # unsure if these are still necessary after I changed from `_BASE_: "../Base-RCNN-FPN.yaml"` to the simpler "../Base-RCNN-C4.yaml"
         self._out_feature_strides = {"res4": 16} # TODO 16 is arbitrary hard-code; pave
-        self._out_feature_channels = {"res4": 3} # TODO arbitrary hard-code; pave
+        self._out_feature_channels = {"res4": 1024} # TODO arbitrary hard-code for 1024; pave???
 
         # initialize dictionary of outputs along forward pass layers / steps
         out_features = ["res4"]
