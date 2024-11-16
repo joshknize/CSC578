@@ -1,4 +1,4 @@
-_BASE_: "../Base-RCNN-FPN.yaml"
+_BASE_: "../Base-RCNN-C4.yaml" # changed to C4 to hopefully reduce complexity
 MODEL:
   WEIGHTS: "" # do not load pre-trained weights. room for improvement later?
   MASK_ON: False
@@ -7,9 +7,8 @@ MODEL:
     NAME: "PrecomputedProposals"
   BACKBONE:
     NAME: "build_hebbnet_backbone"
-  # not allowed to add like this it seems
-  # HIDDEN_LAYER_SIZE: 2000
-  # OUTPUT_LAYER_SIZE: 80
+  RESNETS:
+    OUT_FEATURES: ['out']
 DATASETS:
   TRAIN: ("coco_2017_train",)
   PROPOSAL_FILES_TRAIN: ("detectron2://COCO-Detection/rpn_R_50_FPN_1x/137258492/coco_2017_train_box_proposals_21bc3a.pkl", )

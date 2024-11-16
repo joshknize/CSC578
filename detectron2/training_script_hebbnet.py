@@ -35,6 +35,16 @@ cfg.SOLVER.MAX_ITER = 50000
 cfg.SOLVER.CHECKPOINT_PERIOD = 1000
 cfg.TEST.EVAL_PERIOD = 1000
 
+# set each image to 224x224 for dev purposes. we will want to change this later to improve performance
+cfg.INPUT.MIN_SIZE_TRAIN = (28,)
+cfg.INPUT.MIN_SIZE_TRAIN_SAMPLING = "choice"
+cfg.INPUT.MAX_SIZE_TRAIN = 28
+cfg.INPUT.MIN_SIZE_TEST: 28
+cfg.INPUT.MAX_SIZE_TEST: 28
+# cfg.PROPOSAL_GENERATOR: PrecomputedProposals # this may be an option to potentially avoid issues with proposal generation
+# TODO: think about image normalization "cfg.PIXEL_MEAN"
+cfg.MODEL.ROI_HEADS.IN_FEATURES: ['res4']
+
 # run on GPU
 cfg.MODEL.DEVICE = 'cuda'
 

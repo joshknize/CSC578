@@ -15,6 +15,7 @@ import fvcore.nn.weight_init as weight_init
 import torch
 import torch.nn.functional as F
 from torch import nn
+from typing import Dict
 
 from detectron2.layers import (
     CNNBlockBase,
@@ -31,9 +32,10 @@ from .build import BACKBONE_REGISTRY
 __all__ = [
     "HebbNet",
     "HebbRuleWithActivationThreshold"
-    "build_hebbnet_backbone"
-    # "makestage"
+    "build_hebbnet_backbone",
+    "gradiant_sparsity"
 ]
+
 
 # TODO: Adjust to class Backbone
 class HebbNet(Backbone):
@@ -46,21 +48,62 @@ class HebbNet(Backbone):
         self.relu = nn.ReLU()
         self.softmax = nn.LogSoftmax(dim=1)
 
+        # set necessary dictionary for region-based modular components of RCNN
+            # unsure if these are still necessary after I changed from `_BASE_: "../Base-RCNN-FPN.yaml"` to the simpler "../Base-RCNN-C4.yaml"
+        self._out_feature_strides = {"res4": 16} # TODO 16 is arbitrary hard-code; pave
+        self._out_feature_channels = {"res4": 1024} # TODO 1024 is arbitrary hard-code; pave
+
         # initialize dictionary of outputs along forward pass layers / steps
-        out_features = ["hebb_output"]
-        self._out_feature_channels = {"hebb_output" : 9999}
+        out_features = ["res4"]
         self._out_features = out_features
+
+        # initialize input_layer_size so it can be used by padding_constraints to specify our fixed image size to generalized rcnn
+        self.input_layer_size = input_layer_size
 
 
     def forward(self, x):
         x = self.flatten(x)
         z = self.hebbian_weights(x)
+        width = np.sqrt(self.input_layer_size / 3)
+        features = z.clone().reshape(int(width), int(width), 3)
         z = self.relu(z)  # Apply ReLU activation after the Hebbian layer
         pred = self.classification_weights(z)
         pred = self.softmax(pred)
-        outputs = {} # initialize output dict
-        outputs['hebb_output'] = z # TODO fix hard-coding
+        # create output dict; TODO fix hard-coding
+        outputs = {
+            "res4": features
+        } 
         return outputs # TODO unsure about this. may need other outputs
+    
+    @property
+    def padding_constraints(self) -> Dict[str, int]:
+            """
+            This property is a generalization of size_divisibility. Some backbones and training
+            recipes require specific padding constraints, such as enforcing divisibility by a specific
+            integer (e.g., FPN) or padding to a square (e.g., ViTDet with large-scale jitter
+            in :paper:vitdet). `padding_constraints` contains these optional items like:
+            {
+                "size_divisibility": int,
+                "square_size": int,
+                # Future options are possible
+            }
+            `size_divisibility` will read from here if presented and `square_size` indicates the
+            square padding size if `square_size` > 0.
+
+            TODO: use type of Dict[str, int] to avoid torchscipt issues. The type of padding_constraints
+            could be generalized as TypedDict (Python 3.8+) to support more types in the future.
+            """
+            square_size = np.sqrt(self.input_layer_size / 3) # get the square image size
+
+            return {"square_size": square_size}
+    
+    def output_shape(self):
+        return {
+            name: ShapeSpec(
+                channels=self._out_feature_channels[name], stride=self._out_feature_strides[name]
+            )
+            for name in self._out_features
+        }
     
 class HebbRuleWithActivationThreshold(nn.Module):
     def __init__(self, hidden_layer_size=2000, input_layer_size=784):
@@ -104,8 +147,9 @@ def build_hebbnet_backbone(cfg, input_shape):
         HebbNet: a :class:`HebbNet` instance.
     """
     
-    hidden_layer_size = 2000 # TODO cheating... don't feel like figuring out cfg right now
+    input_layer_size = cfg.INPUT.MAX_SIZE_TRAIN * cfg.INPUT.MAX_SIZE_TRAIN * 3
+    hidden_layer_size = 2352 # input_layer_size # TODO cheating... don't feel like figuring out cfg right now
     output_layer_size = cfg.MODEL.ROI_HEADS.NUM_CLASSES
 
     # return HebbNet(input_shape, hidden_layer_size, output_layer_size) # temporarily hard-code to see further into debugger execution
-    return HebbNet(1024, hidden_layer_size, output_layer_size)
+    return HebbNet(input_layer_size, hidden_layer_size, output_layer_size)
