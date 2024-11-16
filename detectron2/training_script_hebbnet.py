@@ -21,7 +21,7 @@ dataset_dicts = DatasetCatalog.get("coco_train_dog")
 
 cfg = get_cfg()
 cfg.merge_from_file("configs/COCO-Detection/hebb_knize0.yaml")
-cfg.OUTPUT_DIR = "knize/output/dog20241115_hebb"
+cfg.OUTPUT_DIR = "knize/output/dog20241115"
 cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7
 
 cfg.DATASETS.TRAIN = ("coco_train_dog",)
