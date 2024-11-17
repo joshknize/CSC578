@@ -65,7 +65,7 @@ class HebbNet(Backbone):
         x = self.flatten(x)
         z = self.hebbian_weights(x)
         width = np.sqrt(self.input_layer_size / 3)
-        features = z.clone().reshape(1, 3, int(width), int(width)) 
+        features = z.clone().reshape(1, 1024, int(width), int(width)) 
         z = self.relu(z)  # Apply ReLU activation after the Hebbian layer
         pred = self.classification_weights(z)
         pred = self.softmax(pred)
@@ -147,9 +147,10 @@ def build_hebbnet_backbone(cfg, input_shape):
         HebbNet: a :class:`HebbNet` instance.
     """
     
+
     input_layer_size = cfg.INPUT.MAX_SIZE_TRAIN * cfg.INPUT.MAX_SIZE_TRAIN * 3
-    hidden_layer_size = input_layer_size # TODO the box_features (ROI section) wants 1024 channels; trying this for drilling
+    hidden_layer_size = (1024 * input_layer_size) / 3 # TODO the box_features (ROI section) wants 1024 channels; trying this for drilling
     output_layer_size = cfg.MODEL.ROI_HEADS.NUM_CLASSES
 
     # return HebbNet(input_shape, hidden_layer_size, output_layer_size) # temporarily hard-code to see further into debugger execution
-    return HebbNet(input_layer_size, hidden_layer_size, output_layer_size)
+    return HebbNet(input_layer_size, int(hidden_layer_size), output_layer_size)
