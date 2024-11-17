@@ -8,7 +8,7 @@ MODEL:
   BACKBONE:
     NAME: "build_hebbnet_backbone"
   RESNETS:
-    OUT_FEATURES: ['out']
+    OUT_FEATURES: ['res4']
 DATASETS:
   TRAIN: ("coco_2017_train",)
   PROPOSAL_FILES_TRAIN: ("detectron2://COCO-Detection/rpn_R_50_FPN_1x/137258492/coco_2017_train_box_proposals_21bc3a.pkl", )
@@ -16,4 +16,4 @@ DATASETS:
   PROPOSAL_FILES_TEST: ("detectron2://COCO-Detection/rpn_R_50_FPN_1x/137258492/coco_2017_val_box_proposals_ee0dad.pkl", )
 DATALOADER:
   # proposals are part of the dataset_dicts, and take a lot of RAM
-  NUM_WORKERS: 2
+  NUM_WORKERS: 1

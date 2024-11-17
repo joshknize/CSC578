@@ -4,3 +4,5 @@ __pycache__/**
 detectron2/detectron2/data/__pycache__/*
 detectron2/detectron2/data/dataset/__pycache__/*
 detectron2/detectron2/config/__pycache__/*
+__pycache__/
+**/__pycache__/**
