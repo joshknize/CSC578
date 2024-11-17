@@ -1,5 +1,5 @@
 import os
-os.chdir('/home/jknize/main/repo/CSC578/detectron2')
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
 print(os.getcwd())
 
 from detectron2.data.datasets import register_coco_instances
@@ -31,7 +31,7 @@ cfg.MODEL.OUTPUT_LAYER_SIZE = 1
 cfg.MODEL.ROI_HEADS.NMS_THRESH_TEST = 0.5
 cfg.SOLVER.IMS_PER_BATCH = 1
 cfg.SOLVER.BASE_LR = 0.0025
-cfg.SOLVER.MAX_ITER = 50000
+cfg.SOLVER.MAX_ITER = 5
 cfg.SOLVER.CHECKPOINT_PERIOD = 1000
 cfg.TEST.EVAL_PERIOD = 1000
 
@@ -56,6 +56,6 @@ trainer.train()
 
 trainer.model.eval()
 
-evaluator = COCOEvaluator("coco_val_subset", ("bbox",), False, output_dir="./knize/output/dog/hebbnet_test")
+evaluator = COCOEvaluator("coco_val_dog", ("bbox",), False, output_dir="./knize/output/dog/hebbnet_test")
 val_loader = build_detection_test_loader(cfg, "coco_val_dog")
 print(inference_on_dataset(trainer.model, val_loader, evaluator))
