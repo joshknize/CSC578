@@ -1,7 +1,8 @@
 import os
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 print(os.getcwd())
-os.environ["CUDA_VISIBLE_DEVICES"]="0,1,2,3"
+os.environ["CUDA_VISIBLE_DEVICES"]="0"
+import time
 
 from detectron2.data.datasets import register_coco_instances
 from detectron2.data import DatasetCatalog, MetadataCatalog
@@ -36,11 +37,12 @@ cfg.SOLVER.MAX_ITER = 5500 # one epoch = 5500 (with batch size = 1)
 # cfg.SOLVER.CHECKPOINT_PERIOD = 1000 # save disk space on server
 # cfg.TEST.EVAL_PERIOD = 1000
 
-cfg.INPUT.MIN_SIZE_TRAIN = (64,)
+
+cfg.INPUT.MIN_SIZE_TRAIN = (256,)
 cfg.INPUT.MIN_SIZE_TRAIN_SAMPLING = "choice"
-cfg.INPUT.MAX_SIZE_TRAIN = 64
-cfg.INPUT.MIN_SIZE_TEST = 64
-cfg.INPUT.MAX_SIZE_TEST = 64
+cfg.INPUT.MAX_SIZE_TRAIN = 256
+cfg.INPUT.MIN_SIZE_TEST = 256
+cfg.INPUT.MAX_SIZE_TEST = 256
 # cfg.PROPOSAL_GENERATOR: PrecomputedProposals # this may be an option to potentially avoid issues with proposal generation
 # TODO: think about image normalization "cfg.PIXEL_MEAN"
 cfg.MODEL.ROI_HEADS.IN_FEATURES: ['res4']
@@ -51,7 +53,7 @@ cfg.MODEL.ROI_HEADS.IN_FEATURES: ['res4']
     # we should probably opt for a simpler ROI head that is more customizable and doesn't have added complexity due to the mask for image segmentation
 cfg.MODEL.ROI_HEADS.NAME = "StandardROIHeads"
 cfg.MODEL.ROI_BOX_HEAD.NAME = "FastRCNNConvFCHead"
-cfg.MODEL.ROI_BOX_HEAD.FC_DIM = 32
+cfg.MODEL.ROI_BOX_HEAD.FC_DIM = 16
 cfg.MODEL.ROI_BOX_HEAD.CONV_DIM = 8
 # TODO i'm not sure how to set these two up below (pave)
 cfg.MODEL.ROI_BOX_HEAD.NUM_CONV = 2
@@ -63,6 +65,11 @@ cfg.MODEL.DEVICE = 'cuda'
 trainer = DefaultTrainer(cfg)
 # trainer.resume_or_load(resume=False)
 trainer.model.to(cfg.MODEL.DEVICE)
+# trainer.model = torch.nn.parallel.DistributedDataParallel(
+#     trainer.model,
+#     device_ids=[torch.cuda.current_device()],
+#     output_device=torch.cuda.current_device()
+# )
 
 trainer.train()
 

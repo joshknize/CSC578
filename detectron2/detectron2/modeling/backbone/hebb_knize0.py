@@ -41,8 +41,13 @@ __all__ = [
 class HebbNet(Backbone):
     def __init__(self, input_layer_size, hidden_layer_size, output_layer_size, cfg):
         super().__init__()
+        self.max_pool = nn.MaxPool2d(kernel_size=(5, 5), stride=2, padding=0)       # Based on testing, doing MaxPool and then adaptive pooling to keep a shape of 80x80 consistent
+        self.adaptive_pool = nn.AdaptiveAvgPool2d((80, 80))
+
+        self.flattened_size = self.adaptive_pool.output_size[0] * self.adaptive_pool.output_size[1] * 3
+        hidden_layer_size = (cfg.MODEL.ROI_BOX_HEAD.FC_DIM * self.flattened_size) // 3
         self.flatten = nn.Flatten()
-        self.hebbian_weights = nn.Linear(input_layer_size, hidden_layer_size, False)
+        self.hebbian_weights = nn.Linear(self.flattened_size, hidden_layer_size, False)
         self.classification_weights = nn.Linear(hidden_layer_size, output_layer_size, True)
 
         self.relu = nn.ReLU()
@@ -62,9 +67,12 @@ class HebbNet(Backbone):
 
 
     def forward(self, x):
+
+        x = self.max_pool(x)
+        x = self.adaptive_pool(x)
         x = self.flatten(x)
         z = self.hebbian_weights(x)
-        width = np.sqrt(self.input_layer_size / 3)
+        width = np.sqrt(self.flattened_size / 3)
         features = z.clone().reshape(1, self._out_feature_channels['res4'], int(width), int(width)) # TODO: hard-coded
         z = self.relu(z)  # Apply ReLU activation after the Hebbian layer
         pred = self.classification_weights(z)
