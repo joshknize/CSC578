@@ -39,10 +39,15 @@ __all__ = [
 
 # TODO: Adjust to class Backbone
 class HebbNet(Backbone):
-    def __init__(self, input_layer_size, hidden_layer_size, output_layer_size):
+    def __init__(self, input_layer_size, hidden_layer_size, output_layer_size, cfg):
         super().__init__()
+        self.max_pool = nn.MaxPool2d(kernel_size=(5, 5), stride=2, padding=0)       # Based on testing, doing MaxPool and then adaptive pooling to keep a shape of 80x80 consistent
+        self.adaptive_pool = nn.AdaptiveAvgPool2d((80, 80))
+
+        self.flattened_size = self.adaptive_pool.output_size[0] * self.adaptive_pool.output_size[1] * 3
+        hidden_layer_size = (cfg.MODEL.ROI_BOX_HEAD.FC_DIM * self.flattened_size) // 3
         self.flatten = nn.Flatten()
-        self.hebbian_weights = nn.Linear(input_layer_size, hidden_layer_size, False)
+        self.hebbian_weights = nn.Linear(self.flattened_size, hidden_layer_size, False)
         self.classification_weights = nn.Linear(hidden_layer_size, output_layer_size, True)
 
         self.relu = nn.ReLU()
@@ -51,7 +56,7 @@ class HebbNet(Backbone):
         # set necessary dictionary for region-based modular components of RCNN
             # unsure if these are still necessary after I changed from `_BASE_: "../Base-RCNN-FPN.yaml"` to the simpler "../Base-RCNN-C4.yaml"
         self._out_feature_strides = {"res4": 4} # TODO 16 is arbitrary hard-code; pave
-        self._out_feature_channels = {"res4": 32} # TODO arbitrary hard-code for 1024; pave???
+        self._out_feature_channels = {"res4": cfg.MODEL.ROI_BOX_HEAD.FC_DIM} # TODO arbitrary hard-code for 1024; pave???
 
         # initialize dictionary of outputs along forward pass layers / steps
         out_features = ["res4"]
@@ -62,9 +67,12 @@ class HebbNet(Backbone):
 
 
     def forward(self, x):
+
+        x = self.max_pool(x)
+        x = self.adaptive_pool(x)
         x = self.flatten(x)
         z = self.hebbian_weights(x)
-        width = np.sqrt(self.input_layer_size / 3)
+        width = np.sqrt(self.flattened_size / 3)
         features = z.clone().reshape(1, self._out_feature_channels['res4'], int(width), int(width)) # TODO: hard-coded
         z = self.relu(z)  # Apply ReLU activation after the Hebbian layer
         pred = self.classification_weights(z)
@@ -147,10 +155,9 @@ def build_hebbnet_backbone(cfg, input_shape):
         HebbNet: a :class:`HebbNet` instance.
     """
     
-
     input_layer_size = cfg.INPUT.MAX_SIZE_TRAIN * cfg.INPUT.MAX_SIZE_TRAIN * 3
-    hidden_layer_size = (32 * input_layer_size) / 3 # TODO the box_features (ROI section) wants 1024 channels; trying this for drilling
+    hidden_layer_size = (cfg.MODEL.ROI_BOX_HEAD.FC_DIM * input_layer_size) / 3 # TODO the box_features (ROI section) wants 1024 channels; trying this for drilling
     output_layer_size = cfg.MODEL.ROI_HEADS.NUM_CLASSES
 
     # return HebbNet(input_shape, hidden_layer_size, output_layer_size) # temporarily hard-code to see further into debugger execution
-    return HebbNet(input_layer_size, int(hidden_layer_size), output_layer_size)
+    return HebbNet(input_layer_size, int(hidden_layer_size), output_layer_size, cfg)
