@@ -66,11 +66,6 @@ class HebbNet(Backbone):
         # initialize input_layer_size so it can be used by padding_constraints to specify our fixed image size to generalized rcnn
         self.input_layer_size = input_layer_size
 
-        # for img and feature visualization
-        self.img_vis = cfg.MODEL.IMG_VIS
-        self.feat_vis = cfg.MODEL.FEAT_VIS
-        self.feat_vis_num = cfg.MODEL.FEAT_VIS_NUM
-
 
     def forward(self, x):
         if self.img_vis:

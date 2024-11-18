@@ -2,7 +2,6 @@ import os
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 print(os.getcwd())
 os.environ["CUDA_VISIBLE_DEVICES"]="3"
-import time
 
 from detectron2.data.datasets import register_coco_instances
 from detectron2.data import DatasetCatalog, MetadataCatalog
@@ -23,7 +22,7 @@ dataset_dicts = DatasetCatalog.get("coco_train_dog")
 
 cfg = get_cfg()
 cfg.merge_from_file("configs/COCO-Detection/hebb_knize0.yaml")
-cfg.OUTPUT_DIR = "knize/output/dog_ROI_HEAD_tinkering"
+cfg.OUTPUT_DIR = "knize/output/dog_ROI_HEAD_tinkering2"
 cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7
 
 cfg.DATASETS.TRAIN = ("coco_train_dog",)
@@ -33,16 +32,15 @@ cfg.MODEL.OUTPUT_LAYER_SIZE = 1
 cfg.MODEL.ROI_HEADS.NMS_THRESH_TEST = 0.5
 cfg.SOLVER.IMS_PER_BATCH = 1
 cfg.SOLVER.BASE_LR = 0.0025
-cfg.SOLVER.MAX_ITER = 5500 # one epoch = 5500 (with batch size = 1)
+cfg.SOLVER.MAX_ITER = 5 # one epoch = 5500 (with batch size = 1)
 # cfg.SOLVER.CHECKPOINT_PERIOD = 1000 # save disk space on server
 # cfg.TEST.EVAL_PERIOD = 1000
 
-
-cfg.INPUT.MIN_SIZE_TRAIN = (256,)
+cfg.INPUT.MIN_SIZE_TRAIN = (28,)
 cfg.INPUT.MIN_SIZE_TRAIN_SAMPLING = "choice"
-cfg.INPUT.MAX_SIZE_TRAIN = 256
-cfg.INPUT.MIN_SIZE_TEST = 256
-cfg.INPUT.MAX_SIZE_TEST = 256
+cfg.INPUT.MAX_SIZE_TRAIN = 28
+cfg.INPUT.MIN_SIZE_TEST = 28
+cfg.INPUT.MAX_SIZE_TEST = 28
 # cfg.PROPOSAL_GENERATOR: PrecomputedProposals # this may be an option to potentially avoid issues with proposal generation
 # TODO: think about image normalization "cfg.PIXEL_MEAN"
 cfg.MODEL.ROI_HEADS.IN_FEATURES: ['res4']
@@ -59,26 +57,30 @@ cfg.MODEL.ROI_BOX_HEAD.CONV_DIM = 8
 cfg.MODEL.ROI_BOX_HEAD.NUM_CONV = 2
 cfg.MODEL.ROI_BOX_HEAD.NUM_FC = 2
 
-cfg.MODEL.IMG_VIS = False
-cfg.MODEL.FEAT_VIS = False
-cfg.MODEL.FEAT_VIS_NUM = 0
-
 # run on GPU
 cfg.MODEL.DEVICE = 'cuda'
+
+cfg.MODEL.IMG_VIS = True
+cfg.MODEL.FEAT_VIS = True
+cfg.MODEL.FEAT_VIS_NUM = 0
 
 trainer = DefaultTrainer(cfg)
 # trainer.resume_or_load(resume=False)
 trainer.model.to(cfg.MODEL.DEVICE)
-# trainer.model = torch.nn.parallel.DistributedDataParallel(
-#     trainer.model,
-#     device_ids=[torch.cuda.current_device()],
-#     output_device=torch.cuda.current_device()
-# )
 
 trainer.train()
 
 trainer.model.eval()
 
-evaluator = COCOEvaluator("coco_val_dog", ("bbox",), False, output_dir="./knize/output/dog_ROI_HEAD_tinkering")
+evaluator = COCOEvaluator("coco_val_dog", ("bbox",), False, output_dir="./knize/output/dog_ROI_HEAD_tinkering2")
 val_loader = build_detection_test_loader(cfg, "coco_val_dog")
 print(inference_on_dataset(trainer.model, val_loader, evaluator))
+
+
+# TODO
+# try FPN for lower memory
+
+# TODO 2.0: sprinkle of hebb
+# pool images before inputting to model
+# change default trainer
+    # at least hebbian update rule; ideally gradient sparsity

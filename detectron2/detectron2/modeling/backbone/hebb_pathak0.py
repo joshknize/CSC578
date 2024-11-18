@@ -16,7 +16,6 @@ import torch
 import torch.nn.functional as F
 from torch import nn
 from typing import Dict
-import matplotlib.pyplot as plt
 
 from detectron2.layers import (
     CNNBlockBase,
@@ -43,7 +42,7 @@ class HebbNet(Backbone):
     def __init__(self, input_layer_size, hidden_layer_size, output_layer_size, cfg):
         super().__init__()
         self.max_pool = nn.MaxPool2d(kernel_size=(5, 5), stride=2, padding=0)       # Based on testing, doing MaxPool and then adaptive pooling to keep a shape of 80x80 consistent
-        self.adaptive_pool = nn.AdaptiveAvgPool2d((80, 80))
+        self.adaptive_pool = nn.AdaptiveAvgPool2d((128, 128))
 
         self.flattened_size = self.adaptive_pool.output_size[0] * self.adaptive_pool.output_size[1] * 3
         hidden_layer_size = (cfg.MODEL.ROI_BOX_HEAD.FC_DIM * self.flattened_size) // 3
@@ -66,16 +65,8 @@ class HebbNet(Backbone):
         # initialize input_layer_size so it can be used by padding_constraints to specify our fixed image size to generalized rcnn
         self.input_layer_size = input_layer_size
 
-        # for img and feature visualization
-        self.img_vis = cfg.MODEL.IMG_VIS
-        self.feat_vis = cfg.MODEL.FEAT_VIS
-        self.feat_vis_num = cfg.MODEL.FEAT_VIS_NUM
-
 
     def forward(self, x):
-        if self.img_vis:
-            print('Pooled image:')
-            visualize_image(x)
 
         x = self.max_pool(x)
         x = self.adaptive_pool(x)
@@ -84,19 +75,12 @@ class HebbNet(Backbone):
         width = np.sqrt(self.flattened_size / 3)
         features = z.clone().reshape(1, self._out_feature_channels['res4'], int(width), int(width)) # TODO: hard-coded
 
-        if self.img_vis:
-            print('Flattened image:')
-            visualize_image(x)
+        # calculate error ussing hebbian learning rule:
 
-            print('Reshaped image:')
-            visualize_image(x.clone().reshape(1, 3, int(width), int(width)))
-
-        if self.feat_vis:
-            print('Feature map visualization: ' + f'{self.feat_vis_num}')
-            features_vis = features.clone().squeeze(0)
-            plt.imshow(features_vis[self.feat_vis_num].cpu().detach().numpy(), cmap='viridis')
-            plt.axis('off')
-            plt.show()
+        hebbian_rule = HebbRuleWithActivationThreshold()
+        delta_w1 = hebbian_rule(x, z)
+        delta_w1 = gradiant_sparsity(delta_w1, p=0.1, device=z.device)
+        self.hebbian_weights.weight.data += delta_w1
 
         z = self.relu(z)  # Apply ReLU activation after the Hebbian layer
         pred = self.classification_weights(z)
@@ -168,19 +152,9 @@ def gradiant_sparsity(delta_w1, p, device):
   # Set values below the threshold to zero
   delta_w1 = torch.where(torch.abs(delta_w1) >= threshold, delta_w1, torch.tensor(0.0).to(device))
   return delta_w1
-
-def visualize_image(img):
-    if img.dim() < 3: 
-        img = img.clone().squeeze(0).cpu().numpy()
-        plt.plot(img)
-    else:
-        img = img.clone().squeeze(0).permute(1, 2, 0).cpu().numpy()
-        plt.imshow(img)
-    plt.axis('off')
-    plt.show()
         
 # TODO: currently doing nothing; this might not be necessary (see ViT)
-@BACKBONE_REGISTRY.register()
+# @BACKBONE_REGISTRY.register()
 def build_hebbnet_backbone(cfg, input_shape):
     """
     Create a HebbNet instance from config.
