@@ -39,7 +39,7 @@ __all__ = [
 
 # TODO: Adjust to class Backbone
 class HebbNet(Backbone):
-    def __init__(self, input_layer_size, hidden_layer_size, output_layer_size):
+    def __init__(self, input_layer_size, hidden_layer_size, output_layer_size, cfg):
         super().__init__()
         self.flatten = nn.Flatten()
         self.hebbian_weights = nn.Linear(input_layer_size, hidden_layer_size, False)
@@ -51,7 +51,7 @@ class HebbNet(Backbone):
         # set necessary dictionary for region-based modular components of RCNN
             # unsure if these are still necessary after I changed from `_BASE_: "../Base-RCNN-FPN.yaml"` to the simpler "../Base-RCNN-C4.yaml"
         self._out_feature_strides = {"res4": 4} # TODO 16 is arbitrary hard-code; pave
-        self._out_feature_channels = {"res4": 32} # TODO arbitrary hard-code for 1024; pave???
+        self._out_feature_channels = {"res4": cfg.MODEL.ROI_BOX_HEAD.FC_DIM} # TODO arbitrary hard-code for 1024; pave???
 
         # initialize dictionary of outputs along forward pass layers / steps
         out_features = ["res4"]
@@ -147,10 +147,9 @@ def build_hebbnet_backbone(cfg, input_shape):
         HebbNet: a :class:`HebbNet` instance.
     """
     
-
     input_layer_size = cfg.INPUT.MAX_SIZE_TRAIN * cfg.INPUT.MAX_SIZE_TRAIN * 3
-    hidden_layer_size = (32 * input_layer_size) / 3 # TODO the box_features (ROI section) wants 1024 channels; trying this for drilling
+    hidden_layer_size = (cfg.MODEL.ROI_BOX_HEAD.FC_DIM * input_layer_size) / 3 # TODO the box_features (ROI section) wants 1024 channels; trying this for drilling
     output_layer_size = cfg.MODEL.ROI_HEADS.NUM_CLASSES
 
     # return HebbNet(input_shape, hidden_layer_size, output_layer_size) # temporarily hard-code to see further into debugger execution
-    return HebbNet(input_layer_size, int(hidden_layer_size), output_layer_size)
+    return HebbNet(input_layer_size, int(hidden_layer_size), output_layer_size, cfg)
