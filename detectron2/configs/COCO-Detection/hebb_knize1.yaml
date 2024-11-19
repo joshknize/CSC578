@@ -1,0 +1,19 @@
+_BASE_: "../Base-RCNN-C4.yaml" # changed to C4 to hopefully reduce complexity
+MODEL:
+  WEIGHTS: "" # do not load pre-trained weights. room for improvement later?
+  MASK_ON: False
+  LOAD_PROPOSALS: True
+  PROPOSAL_GENERATOR:
+    NAME: "PrecomputedProposals"
+  BACKBONE:
+    NAME: "build_hebbnet_backbone1"
+  RESNETS:
+    OUT_FEATURES: ['res4']
+DATASETS:
+  TRAIN: ("coco_2017_train",)
+  PROPOSAL_FILES_TRAIN: ("detectron2://COCO-Detection/rpn_R_50_FPN_1x/137258492/coco_2017_train_box_proposals_21bc3a.pkl", )
+  TEST: ("coco_2017_val",)
+  PROPOSAL_FILES_TEST: ("detectron2://COCO-Detection/rpn_R_50_FPN_1x/137258492/coco_2017_val_box_proposals_ee0dad.pkl", )
+DATALOADER:
+  # proposals are part of the dataset_dicts, and take a lot of RAM
+  NUM_WORKERS: 1
