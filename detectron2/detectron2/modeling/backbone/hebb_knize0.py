@@ -43,13 +43,16 @@ class HebbNet(Backbone):
     def __init__(self, input_layer_size, hidden_layer_size, output_layer_size, cfg):
         super().__init__()
         self.max_pool = nn.MaxPool2d(kernel_size=(5, 5), stride=2, padding=0)       # Based on testing, doing MaxPool and then adaptive pooling to keep a shape of 80x80 consistent
-        self.adaptive_pool = nn.AdaptiveAvgPool2d((80, 80))
+        self.adaptive_pool = nn.AdaptiveAvgPool2d((28, 28))
         self.cfg = cfg
         self.flattened_size = self.adaptive_pool.output_size[0] * self.adaptive_pool.output_size[1] * 3
         self.hidden_layer_size = (cfg.MODEL.ROI_BOX_HEAD.FC_DIM * self.flattened_size) // 3
         self.flatten = nn.Flatten()
         self.hebbian_weights = nn.Linear(self.flattened_size, self.hidden_layer_size, False)
         self.classification_weights = nn.Linear(self.hidden_layer_size, output_layer_size, True)
+
+        self.activation_thresholder = HebbRuleWithActivationThreshold(hidden_layer_size=self.hidden_layer_size,
+                                                                input_layer_size=self.flattened_size).to(self.cfg.MODEL.DEVICE)
 
         self.relu = nn.ReLU()
         self.softmax = nn.LogSoftmax(dim=1)
@@ -106,9 +109,8 @@ class HebbNet(Backbone):
             "res4": features
         }
 
-        activation_thresholder = HebbRuleWithActivationThreshold(hidden_layer_size=self.hidden_layer_size,
-                                                                input_layer_size=self.flattened_size).to(self.cfg.MODEL.DEVICE)
-        self.hebbian_update(x, z, activation_thresholder)
+        
+        self.hebbian_update(x, z, self.activation_thresholder)
 
         return outputs # TODO unsure about this. may need other outputs
     
