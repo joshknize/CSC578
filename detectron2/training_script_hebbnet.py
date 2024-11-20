@@ -1,7 +1,7 @@
 import os
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 print(os.getcwd())
-os.environ["CUDA_VISIBLE_DEVICES"]="3"
+os.environ["CUDA_VISIBLE_DEVICES"]="2"
 import time
 
 from detectron2.data.datasets import register_coco_instances
@@ -23,7 +23,7 @@ dataset_dicts = DatasetCatalog.get("coco_train_dog")
 
 cfg = get_cfg()
 # cfg.MODEL.WEIGHTS = "knize/output/dog_ROI_HEAD_tinkering2/model_final.pth"
-cfg.merge_from_file("configs/COCO-Detection/hebb_knize1.yaml")
+cfg.merge_from_file("configs/COCO-Detection/hebbnet_backbone.yaml")
 cfg.OUTPUT_DIR = "knize/output/dog_ROI_HEAD_tinkering2"
 cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7
 
