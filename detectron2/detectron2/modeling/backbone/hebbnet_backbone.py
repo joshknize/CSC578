@@ -8,12 +8,7 @@ from typing import Dict
 import matplotlib.pyplot as plt
 
 from detectron2.layers import (
-    CNNBlockBase,
-    Conv2d,
-    DeformConv,
-    ModulatedDeformConv,
     ShapeSpec,
-    get_norm,
 )
 
 from .backbone import Backbone
@@ -27,9 +22,8 @@ __all__ = [
 ]
 
 
-# TODO: Adjust to class Backbone
 class HebbNet(Backbone):
-    def __init__(self, input_layer_size, hidden_layer_size, output_layer_size, cfg):
+    def __init__(self, cfg):
         super().__init__()
         self.max_pool = nn.MaxPool2d(kernel_size=(5, 5), stride=2, padding=0)       # Based on testing, doing MaxPool and then adaptive pooling to keep a shape of 80x80 consistent
         self.adaptive_pool = nn.AdaptiveAvgPool2d((cfg.INPUT.MAX_SIZE_TRAIN, cfg.INPUT.MAX_SIZE_TRAIN))
@@ -59,7 +53,7 @@ class HebbNet(Backbone):
         self.softmax = nn.LogSoftmax(dim=1)
 
         self._out_feature_strides = {"res4": 4}
-        self._out_feature_channels = {"res4": cfg.MODEL.ROI_BOX_HEAD.FC_DIM} # TODO arbitrary hard-code for 1024; pave???
+        self._out_feature_channels = {"res4": cfg.MODEL.ROI_BOX_HEAD.FC_DIM}
 
         # initialize dictionary of outputs along forward pass layers / steps
         out_features = ["res4"]
@@ -163,7 +157,7 @@ class HebbRuleWithActivationThreshold(nn.Module):
 
     def forward(self, x: torch.Tensor, z: torch.Tensor):
         with torch.no_grad():
-          activation = torch.matmul(z.T,x) #(2000,784) - matrix multipication
+          activation = torch.matmul(z.T,x)
 
           if self.t==1:
               delta_w1 = activation
@@ -200,7 +194,6 @@ def visualize_image(img):
     plt.axis('off')
     plt.show()
         
-# TODO: currently doing nothing; this might not be necessary (see ViT)
 @BACKBONE_REGISTRY.register()
 def build_hebbnet_backbone1(cfg, input_shape):
     """
@@ -214,4 +207,4 @@ def build_hebbnet_backbone1(cfg, input_shape):
     hidden_layer_size = (cfg.MODEL.ROI_BOX_HEAD.FC_DIM * input_layer_size) / (3  * cfg.MODEL.NUM_HIDDEN) 
     output_layer_size = cfg.MODEL.ROI_HEADS.NUM_CLASSES
 
-    return HebbNet(input_layer_size, int(hidden_layer_size), output_layer_size, cfg)
+    return HebbNet(cfg)
