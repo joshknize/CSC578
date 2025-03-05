@@ -16,7 +16,8 @@ The inspiration for this research comes from the original **[HebbNet](https://ie
 We followed a structured approach inspired by **HebbNet**, incorporating Hebbian Learning in the **feature extraction** phase of our object detection model. Our implementation involved the following key steps:  
 
 * **Modifying Detectron2 Backbone**  
-  - We started with **Facebook Research’s Detectron2** framework.  
+  - We started with **Facebook Research’s Detectron2** framework.
+  - ![image](https://github.com/user-attachments/assets/8dd87366-75c4-4735-88d2-cb7683caadd9)
   - Instead of using a standard **ResNet backbone**, we replaced it with a **custom HebbNet-based backbone** for feature extraction.  
 
 * **Using Hebbian Learning for Feature Extraction**  
